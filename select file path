@@ -1,0 +1,9 @@
+def code():
+    buttons = ('ok','skip')
+    user_input = hou.ui.displayMessage('oops', buttons)
+    if user_input == 0:
+        user_file = hou.ui.selectFile(None, 'File Path')
+        print user_file
+    else:
+        user_file = '$HIP'
+        print 'user cancelled'
