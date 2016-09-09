@@ -1,3 +1,5 @@
+# This self tool imports alembic caches to new geometry and sets up some initial attributes like velocity
+
 #go to obj directory
 obj = hou.node("/obj")
 
@@ -50,3 +52,5 @@ vel.setRenderFlag(True)
 #set node name
 geo.setName("collision_geo", unique_name=True)
 geo.setColor(hou.Color([1,0.2,0.3]))
+
+#Zybrand Jacobs
