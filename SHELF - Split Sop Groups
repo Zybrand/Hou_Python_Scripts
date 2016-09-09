@@ -1,0 +1,19 @@
+# This node splits geometry groups into different branches
+selected = hou.selectedNodes()
+
+if len(selected) == 0:
+    hou.ui.displayMessage("No Node Selected", title = "Split Group")
+else:
+    current = selected[0]
+    #get groups tuple
+    primGroups = current.geometry().primGroups()
+    
+    #loop over groups and create a blast node for the group
+    for prim in primGroups:
+    
+        delete = current.createOutputNode("blast", prim.name())
+        delete.parm("group").set(prim.name())
+        delete.parm("negate").set(1)
+        delete.parm("removegrp").set(1)
+        
+        delete.moveToGoodPosition()
