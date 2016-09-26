@@ -1,0 +1,16 @@
+#create a name attribute with the group names from the primitive groups on a mesh
+node = hou.pwd()
+geo = node.geometry()
+
+#get the prim groups and create a name attribute
+groups = geo.primGroups()
+populate_name = geo.addAttrib(hou.attribType.Prim, "name", "")
+
+#loop over groups get the group name and the prims in group
+for group in groups:   
+    string = group.name()
+    prims = group.prims()
+    
+    #set the name attribute to the group name
+    for prim in prims:    
+        prim.setAttribValue(populate_name, string)
