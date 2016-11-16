@@ -1,0 +1,2 @@
+# callback script to cook all nodes in an asset
+for node in hou.pwd().allSubChildren():  node.cook(force=True) 
