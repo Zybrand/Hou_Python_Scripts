@@ -1,0 +1,18 @@
+#build a menu from numbered point groups in a sub node of the hda
+node = hou.pwd()
+
+#first token to select all groups
+result =["*","All"]
+
+#find node with the groups on it
+for child in node.children():    
+    if child.name() == "GRP": 
+        
+        #run over groups and build tokens
+        for group in child.geometry().pointGroups():            
+            name = group.name()
+            
+            if name[:8] == "stonepts": #parent group name                
+                result += [name[9:], name]
+
+return result
