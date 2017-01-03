@@ -51,7 +51,10 @@ if user_input != 2:
     vel.setRenderFlag(True)
     
     #set node name
-    geo.setName("collision_geo", unique_name=True)
+    name = user_file.split("/").pop()
+    name = name.split(".")[0]
+    
+    geo.setName(name, unique_name=True)
     geo.setColor(hou.Color([1,0.2,0.3]))
 
 #Zybrand Jacobs
