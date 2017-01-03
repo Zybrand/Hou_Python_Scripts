@@ -9,8 +9,10 @@ user_input = hou.ui.displayMessage('Choose File', buttons)
 
 #execute if not canceled
 if user_input != 2:
-    #creat geo with alembic reader inside
-    geo = obj.createNode("geo", "geo1", run_init_scripts=False)
+    #create geo with alembic reader inside, maintain run init scripts and delete
+    #defualt file node after otherwise render tab on geo node will be empty
+    geo = obj.createNode("geo", "geo1")
+    geo.children()[0].destroy()
     abc = geo.createNode("alembic")
 
     if user_input == 0:
