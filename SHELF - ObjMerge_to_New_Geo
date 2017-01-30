@@ -1,25 +1,29 @@
-#This shelf to object merges selecte node into a new geometry node
+#! This shelf to object merges selecte node into a new geometry node
 
 #get path and name of selected node and parent obj
 selected = hou.selectedNodes()
-path = ""
+nodepath = ""
 
 if len(selected) < 1:
     hou.ui.displayMessage("No Node Selected")
+    
 else:
     for sel in selected:        
-        path = path + sel.path()
+        nodepath = sel.path()
+    
+    selectedname = hou.node(nodepath)
+    parent = str(selectedname.parent())
+    
+    if parent != "obj":
+        nodename = parent
+    else:
+        nodename = selectedname
 
-    name = hou.node(path)
-    parent = name.node("..")
-
-    #creat geo with object merge inside
-    geo = hou.node("/obj").createNode("geo", str(parent) + "1", run_init_scripts=False)
-    objmerge = geo.createNode("object_merge", str(parent) + "_" + str(name))
-
-    objmerge.parm("objpath1").set(path)
+    geo = hou.node("/obj").createNode("geo", str(nodename) + "_copy", run_init_scripts=False)
+    
+    objmerge = geo.createNode("object_merge", str(nodename) + "_" + str(selectedname))
+    objmerge.parm("objpath1").set(nodepath)
     objmerge.parm("xformtype").set(1)
         
-#print path
-
+        
 #Zybrand Jacobs
