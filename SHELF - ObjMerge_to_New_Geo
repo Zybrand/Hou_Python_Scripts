@@ -24,6 +24,10 @@ else:
     objmerge = geo.createNode("object_merge", str(nodename) + "_" + str(selectedname))
     objmerge.parm("objpath1").set(nodepath)
     objmerge.parm("xformtype").set(1)
+    
+    p = hou.ui.paneTabOfType(hou.paneTabType.NetworkEditor)
+    p.setCurrentNode(objmerge)
+    p.homeToSelection()
         
         
 #Zybrand Jacobs
